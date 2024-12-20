@@ -1,0 +1,15 @@
+
+
+org 100h 
+
+
+mov AH,1
+INT 21h 
+
+
+mov AH,2
+mov DL,AL
+INT 21h
+
+
+ret

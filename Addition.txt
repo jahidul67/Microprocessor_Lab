@@ -1,0 +1,51 @@
+.model small
+.stack 100h
+.data 
+    a db 10,13,"Enter the first value: $"
+    b db 10,13,"Enter the second value: $"
+    c db 10,13,"Result is $"
+.code
+main proc 
+    ;newline
+    mov ax,@data
+    mov ds,ax
+    
+    lea dx,a
+    mov ah,09
+    int 21h
+    
+    ;Taken input 1
+    mov ah,1
+    int 21h
+    mov bl,al
+    
+    ;newline
+    ;mov ah,2
+    ;mov dl,10
+    ;int 21h
+    ;mov dl,13
+    ;int 21h
+            
+    lea dx,b
+    mov ah,09
+    int 21h 
+          
+    ;Taken input 2
+    mov ah,1
+    int 21h
+    mov bh,al
+    
+    ;addition
+    add bh,bl
+    sub bh,48
+    
+    
+    lea dx,c
+    mov ah,09
+    int 21h
+    
+    ;output
+    mov ah,2
+    mov dl,bh
+    int 21h   
+end main    

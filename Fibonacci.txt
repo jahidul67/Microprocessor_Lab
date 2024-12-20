@@ -1,0 +1,38 @@
+.MODEL SMALL
+.DATA 
+    a db 10,13, "Fibonacci first terms", 10,13
+    db "Starts from 0 while others link", 10,13
+    db "to include the 1 in the first terms", "$"
+.CODE 
+MAIN PROC
+    MOV AX,@DATA         
+    MOV DS,AX
+
+    LEA DX,a
+    MOV AH,09H
+    INT 21H
+
+    MOV DL,20H
+    MOV AH,02H
+    INT 21H
+    
+    MOV BH,1     
+    MOV DH,1   
+    MOV CX,7   
+    
+fibo:
+    OR DL,30H    
+    MOV AH,02H
+    INT 21H
+        
+    MOV DL,DH  
+    MOV DH,BH 
+    ADD DH,DL 
+    
+    LOOP fibo 
+    
+    MOV AH,4CH
+    INT 21H
+MAIN ENDP
+END MAIN
+

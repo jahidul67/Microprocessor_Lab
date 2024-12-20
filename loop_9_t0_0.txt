@@ -1,0 +1,17 @@
+org 100h
+
+mov ah,1
+int 21h
+mov bl,al
+
+L2:
+    jmp level1
+
+level1:
+    mov ah,2
+    mov dl,bl
+    int 21h
+    dec bl
+    cmp bl,'/'
+    jg level1
+ret

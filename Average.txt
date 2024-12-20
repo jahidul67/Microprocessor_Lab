@@ -1,0 +1,56 @@
+.MODEL SMALL
+.DATA 
+    val DB 0
+    a DB 0AH,0DH, 'ENTER HOW MANY VALUES: $'
+    b DB 0AH,0DH, 'ENTER VALUE: $'
+    c DB 0AH,0DH, 'AVERAGE: $'
+    ;Md Jahidul Islam
+.CODE 
+MAIN PROC
+    MOV AX, @DATA         
+    MOV DS, AX
+
+    LEA DX, a
+    MOV AH, 09H
+    INT 21H
+
+    MOV AH,01H
+    INT 21H 
+    
+    SUB AL,30H   
+    MOV CL,AL      
+    MOV BL,AL          
+    MOV val,0       
+
+L1:
+    LEA DX, b
+    MOV AH, 09H
+    INT 21H
+
+    MOV AH, 01H
+    INT 21H
+    SUB AL, 30H           
+    ADD AL, val         
+    MOV val, AL          
+    LOOP L1      
+
+L2:
+    LEA DX,c
+    MOV AH,09H
+    INT 21H
+
+    MOV AX,0             
+    MOV AL,val         
+    DIV BL                
+
+    ADD AL,30H           
+    MOV DL,AL            
+    MOV AH,02H      
+    INT 21H
+
+    MOV AH,4CH
+    INT 21H 
+    
+MAIN ENDP
+END MAIN
+
